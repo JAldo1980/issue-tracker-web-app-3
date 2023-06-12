@@ -7,6 +7,8 @@ document.querySelector(".input-section-el").innerHTML = issueInsert;
 // 1. declare all variables
 const form = document.getElementById("issue-form");
 
+const issueObjectArray = [];
+
 // ***********************************
 // 2. CREATE CONSTRUCTOR FUNCTION CLASS
 // ***********************************
@@ -21,28 +23,6 @@ class issueObject {
     this.isClosed = false; // Initialize the state as "open"
   }
 }
-
-// Retrieve stored objects from local storage
-const storedObjects = getLocalStoredObjects();
-
-// Check if storedObjects exist and assign it to the issueObjectArray
-const issueObjectArray = storedObjects ? storedObjects : [];
-
-// push ALL objects to storage
-const allStoredObjects = JSON.parse(localStorage.getItem("objects"));
-if (allStoredObjects) {
-  issueObjectArray.push(allStoredObjects);
-}
-
-console.log("ALL STORED OBJECTS:", allStoredObjects);
-
-// push objects to ARCHIVED storage
-const archivedObjects = JSON.parse(localStorage.getItem("objects"));
-if (archivedObjects) {
-  issueObjectArray.push(archivedObjects);
-}
-
-console.log("ALL ARCHIVED OBJECTS:", archivedObjects);
 
 // ***************************
 // EVENT LISTENER FOR THE FORM
@@ -106,13 +86,10 @@ function createNewObject() {
     isClosed
   );
   issueObjectArray.unshift(newIssueObject);
-
-  // code below to save ALL objects
-  localStorage.setItem("objects", JSON.stringify(issueObjectArray));
 }
 
 // **********************
-// RENDER OBJECT FUNCTION
+// RENDER OBJECT FUNCTIONd
 // **********************
 
 function renderObject() {
@@ -141,7 +118,6 @@ function renderObject() {
     <div class="button-container">
       <button class="close-button">Close</button>
       <button class="delete-button">Delete</button>
-      <button class="archive-button">Archive</button>
     </div>
   `;
   const buttonContainer = objectElement.querySelector(".button-container");
@@ -163,15 +139,7 @@ function renderObject() {
         objectElement.querySelector(".id-output").textContent
       );
       console.log("closed:", isClosed);
-    } else if (button.classList.contains("delete-button")) {
-      objectElement.remove();
-    } else if (button.classList.contains("archive-button")) {
-      // save object in local storage - note: stringify it, because objects can not be stored in local storage as is.
-      console.log("Archive button clicked for object with ID:", ident);
-      // store objects
-      // save object in local storage
-      localStorage.setItem("objects", JSON.stringify(issueObjectArray));
-    }
+    } else if (button.classList.contains("delete-button")) objectElement.remove();
   });
   document.getElementById("output-section-el").appendChild(objectElement);
 }
@@ -202,13 +170,9 @@ function generateRandomID() {
   return id;
 }
 
-// ************************************
-// LOAD/RETRIVE ALL LOCAL STORAGE ITEMS
-// ************************************
+// *************
+// LOCAL STORAGE - SAVE
+// *************
 
-function getLocalStoredObjects() {
-  let objectsFromLocalStorage = JSON.parse(localStorage.getItem("objects"));
-  return objectsFromLocalStorage;
-}
-
-console.log("getLocalStoredObjects():", getLocalStoredObjects());
+// Convert the array of objects to a string
+const savedObjectString = JSON.stringify(issueObjectArray);
