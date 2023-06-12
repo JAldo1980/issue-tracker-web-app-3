@@ -1,0 +1,231 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: "Poppins", sans-serif;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* end of css reset */
+
+/* font */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* font */
+
+.container {
+  max-width: 1000px;
+  margin: 1em auto;
+  border: 1px lightgray solid;
+  padding: 1em;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+header p {
+  font-size: 1.2rem;
+}
+
+.input-section-el {
+  margin-top: 3em;
+  background-color: lightgray;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.input-holder-el {
+  margin-top: 2em;
+}
+
+.input-holder-el h2,
+label {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+input[type="text"],
+[type="date"],
+[type="submit"],
+select {
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+  width: 100%;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  background-color: palegoldenrod;
+  transform: 4ms;
+}
+
+input[type="submit"]:hover {
+  background-color: goldenrod;
+  color: white;
+  transform: 4ms;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* form styling (issue-form) */
+.grid-col-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+}
+
+/* output styling */
+
+.issue-output-box {
+  margin-top: 1em;
+  background-color: aliceblue;
+  padding: 1em;
+}
+
+.id-date-output-box {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.priority-status-box {
+  display: flex;
+  gap: 1em;
+}
+
+.assigned-assignor-box {
+  display: flex;
+  gap: 1em;
+}
+
+.button-container {
+  margin-top: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.delete {
+  display: none;
+}
+
+.closed {
+  background-color: orange;
+  color: white;
+}
+
+.priority-low {
+  background-color: lightblue;
+}
+
+.priority-medium {
+  background-color: orange;
+}
+
+.priority-high {
+  background-color: red;
+  color: white;
+}
+
+/* output styling */
+
+.date-output {
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+}
+
+.issue-output {
+  margin-top: 1em;
+}
+
+.priority-status-box {
+  margin-top: 1em;
+  align-items: center;
+}
+
+.priority-output {
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+
+.assigned-assignor-box {
+  margin-top: 1em;
+}
