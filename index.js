@@ -30,7 +30,6 @@ class issueObject {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  console.log("form submitted");
 
   // CHECK THAT PRIORITY HAS BEEN SELECTED
   const dropDown = document.getElementById("dropdown");
@@ -39,7 +38,6 @@ form.addEventListener("submit", function (e) {
   if (dropDown.value === " " || selectedOption.disabled) {
     // The dropdown is not selected or the selected option is disabled
     // Display an error message or take appropriate action
-    console.log("Please select a priority");
     alert("Please select a priority");
     return; // Stop form submission
   }
@@ -61,6 +59,7 @@ let assigned;
 let assignor;
 let ident;
 let isClosed;
+let ukDateFormat; // Declare ukDateFormat as a global variable
 
 // **************************
 // CREATE NEW OBJECT FUNCTION
@@ -72,6 +71,11 @@ function createNewObject() {
   issue = document.getElementById("description").value;
   priority = document.getElementById("dropdown").value;
   date = document.getElementById("date").value;
+
+  // convert date
+  let options = { day: "numeric", month: "numeric", year: "numeric" };
+  ukDateFormat = new Date(date).toLocaleDateString("en-GB", options); // Assign the formatted date to the global variable
+
   assigned = document.getElementById("assigned").value;
   assignor = document.getElementById("assignor").value;
   ident = generateRandomID();
@@ -104,9 +108,9 @@ function renderObject() {
   objectElement.innerHTML = `
     <div class="id-date-output-box">
       <div class="id-output">ID: ${ident}</div>
-      <div class="date-output">Due date: ${date}</div>
+      <div class="date-output">Due date: ${ukDateFormat}</div>
     </div>
-    <h2 class="issue-output">Issue:${issue}</h2>
+    <h2 class="issue-output">${issue}</h2>
     <div class="priority-status-box">
       <div class="priority-output" style="background-color: ${priorityColor}">${priority}</div>
       <div class="status-output">OPEN</div>
@@ -134,11 +138,6 @@ function renderObject() {
       closeBtn.classList.add("delete");
       // change close status
       isClosed = true;
-      console.log(
-        "Close button clicked for object with ID:",
-        objectElement.querySelector(".id-output").textContent
-      );
-      console.log("closed:", isClosed);
     } else if (button.classList.contains("delete-button")) objectElement.remove();
   });
   document.getElementById("output-section-el").appendChild(objectElement);
@@ -171,8 +170,9 @@ function generateRandomID() {
 }
 
 // *************
-// LOCAL STORAGE - SAVE
+// FILTER
 // *************
 
-// Convert the array of objects to a string
-const savedObjectString = JSON.stringify(issueObjectArray);
+// *************
+// LOCAL STORAGE - SAVE
+// *************
